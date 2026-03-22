@@ -2065,7 +2065,7 @@ function openTableView() {
 
   const week = currentView.week || 1;
   const bgKey = 'week' + Math.min(week, 5);
-  const bgUrl = WEEK_BG[bgKey] || '';
+  const bgUrl = (typeof WEEK_BG !== 'undefined' && WEEK_BG[bgKey]) ? WEEK_BG[bgKey] : '';
 
   const overlay = document.getElementById('tableViewOverlay');
   const photoBg = document.getElementById('tableViewPhotoBg');
