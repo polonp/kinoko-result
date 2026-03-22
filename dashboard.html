@@ -1631,6 +1631,10 @@ function openDayModal(split, month, week, dayDate, blockNum) {
 // Full-screen table view
 let _tableViewData = null;
 
+
+// Safe WEEK_BG fallback - defined here so openTableView never throws ReferenceError
+if (typeof WEEK_BG === 'undefined') { var WEEK_BG = {}; }
+
 function openTableView() {
   const s = _currentModalSession;
   const sheet = _currentModalSheet;
