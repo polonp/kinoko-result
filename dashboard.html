@@ -1338,14 +1338,11 @@ function renderSidebar() {
 // ── Views ───────────────────────────────────────────────────────
 function renderView() {
   const el = document.getElementById('view');
-  // Clear inline background override unless we're in week view
-  const isWeekView = currentView.month && currentView.week && !currentView.dayDate;
-  if (!isWeekView) {
-    document.body.style.removeProperty('background-image');
-    document.body.style.removeProperty('background-size');
-    document.body.style.removeProperty('background-position');
-    document.body.style.removeProperty('background-attachment');
-  }
+  // Always restore CSS background (never let inline styles override)
+  document.body.style.removeProperty('background-image');
+  document.body.style.removeProperty('background-size');
+  document.body.style.removeProperty('background-position');
+  document.body.style.removeProperty('background-attachment');
   if (currentView === 'overview') { el.innerHTML = renderOverview(); }
   else if (currentView.split && !currentView.type) { el.innerHTML = renderSplitView(currentView.split); }
   else if (currentView.split && currentView.type && !currentView.month) { el.innerHTML = renderSectionView(currentView.split, currentView.type); }
@@ -1619,14 +1616,7 @@ function renderMonthView(split, month) {
 }
 
 function renderWeekView(split, month, week) {
-  // Set background photo for this week
-  const _wbKey = 'week' + Math.min(Number(week), 5);
-  if (typeof WEEK_BG !== 'undefined' && WEEK_BG[_wbKey]) {
-    document.body.style.backgroundImage = "url('" + WEEK_BG[_wbKey] + "')";
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
-    document.body.style.backgroundAttachment = 'fixed';
-  }
+  // Week photo is shown only inside tableViewOverlay (not on body)
 
   const sessions = getSessions(currentYear, split, 'scrim', month, week);
   const DAY_EN  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -2218,7 +2208,7 @@ function enterDashboard() {
   <!-- Dark overlay on photo -->
   <div style="position:fixed;inset:0;background:rgba(0,0,0,0.45);pointer-events:none;"></div>
   <!-- White veil -->
-  <div style="position:fixed;inset:0;background:rgba(255,255,255,0.18);pointer-events:none;"></div>
+  <div style="position:fixed;inset:0;background:rgba(255,255,255,0.3);pointer-events:none;"></div>
   <!-- Content -->
   <div style="position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:32px 24px 60px;">
     <button onclick="closeTableView()" style="position:fixed;top:18px;right:24px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.25);color:#fff;font-size:18px;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;">✕</button>
