@@ -556,7 +556,7 @@ body::before {
 </style>
 <style id="result-table-css">
 #tableViewContent {
-    zoom: 1.4;
+    zoom: 1.2;
     --bg: #e8e8e8;
     --panel: #dedede;
     --border: #c4c4c4;
@@ -2108,13 +2108,13 @@ function openTableView() {
         <div style="font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.35);margin-bottom:6px;text-transform:uppercase;">${date}</div>
         <div style="font-size:24px;font-weight:700;color:#fff;letter-spacing:1px;">${name}</div>
       </div>
-      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-        ${s?.place != null ? `<div style="text-align:center;"><div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:4px;">FINAL PLACE</div><div style="font-size:42px;font-weight:800;color:${placeColor};line-height:1;">${s.place}<span style="font-size:18px;opacity:0.6;">位</span></div></div>` : ''}
-        ${s?.kills != null ? `<div style="text-align:center;"><div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:4px;">KILLS</div><div style="font-size:36px;font-weight:700;color:#fff;line-height:1;">${s.kills}</div></div>` : ''}
-        ${s?.ppt   != null ? `<div style="text-align:center;"><div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:4px;">PLACE PT</div><div style="font-size:36px;font-weight:700;color:#fff;line-height:1;">${s.ppt}</div></div>` : ''}
-        ${s?.tpt   != null ? `<div style="text-align:center;"><div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:4px;">TOTAL PT</div><div style="font-size:36px;font-weight:700;color:#fff;line-height:1;">${s.tpt}</div></div>` : ''}
-        ${resultUrl ? `<a href="${resultUrl}" target="_blank" rel="noopener" style="font-size:11px;letter-spacing:2px;color:#ffa01e;text-decoration:none;border:1px solid rgba(255,160,30,0.5);padding:7px 16px;border-radius:5px;white-space:nowrap;">🔗 公式リザルト</a>` : ''}
+      <div style="display:flex;align-items:stretch;gap:2px;border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+        ${s?.place != null ? `<div style="background:#b89640;padding:18px 28px;text-align:center;min-width:120px;"><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;">FINAL PLACE</div><div style="font-size:52px;font-weight:300;color:#fff;line-height:1;font-family:'Barlow',sans-serif;">${s.place}<span style="font-size:22px;opacity:0.7;margin-left:2px;">位</span></div></div>` : `<div style="background:#b89640;padding:18px 28px;text-align:center;min-width:120px;"><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;">FINAL PLACE</div><div style="font-size:52px;font-weight:300;color:#fff;line-height:1;font-family:'Barlow',sans-serif;">—</div></div>`}
+        ${s?.kills != null ? `<div style="background:#b8707a;padding:18px 28px;text-align:center;min-width:110px;"><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;">KILLS</div><div style="font-size:52px;font-weight:300;color:#fff;line-height:1;font-family:'Barlow',sans-serif;">${s.kills}</div></div>` : ''}
+        ${s?.ppt   != null ? `<div style="background:#6888a8;padding:18px 28px;text-align:center;min-width:110px;"><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;">PLACE PT</div><div style="font-size:52px;font-weight:300;color:#fff;line-height:1;font-family:'Barlow',sans-serif;">${s.ppt}</div></div>` : ''}
+        ${s?.tpt   != null ? `<div style="background:#72986a;padding:18px 28px;text-align:center;min-width:110px;"><div style="font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;">TOTAL PT</div><div style="font-size:52px;font-weight:300;color:#fff;line-height:1;font-family:'Barlow',sans-serif;">${s.tpt}</div></div>` : ''}
       </div>
+      ${resultUrl ? `<a href="${resultUrl}" target="_blank" rel="noopener" style="font-size:11px;letter-spacing:2px;color:#ffa01e;text-decoration:none;border:1px solid rgba(255,160,30,0.5);padding:7px 16px;border-radius:5px;white-space:nowrap;">🔗 公式リザルト</a>` : ''}
     </div>`;
 
   document.getElementById('tableViewHeader').innerHTML = headerHtml;
