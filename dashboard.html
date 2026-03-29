@@ -356,8 +356,8 @@ body::before {
   .main { padding:16px 12px 32px; }
 
   /* Title screen */
-  .title-logo { font-size:42px !important; letter-spacing:-2px; }
-  .title-content { padding:0 0 80px 20px !important; }
+  .title-logo { font-size:clamp(28px, min(10vw, 10vh), 52px) !important; letter-spacing:-2px; }
+  .title-content { padding:0 0 clamp(24px, 8vh, 80px) 20px !important; }
 
   /* Page header */
   .page-header { flex-direction:column; gap:10px; }
@@ -380,8 +380,8 @@ body::before {
 
 /* Very small phones */
 @media(max-width:390px){
-  .title-logo { font-size:42px !important; letter-spacing:-2px; }
-  .title-content { padding:0 0 80px 20px !important; }
+  .title-logo { font-size:clamp(24px, min(10vw, 9vh), 42px) !important; letter-spacing:-2px; }
+  .title-content { padding:0 0 clamp(20px, 7vh, 80px) 16px !important; }
 }
 
 /* ── Title Screen ── */
@@ -393,6 +393,13 @@ body::before {
   justify-content:flex-start;
   overflow:hidden;
   cursor:pointer;
+  /* スクロール防止 */
+  touch-action:none;
+}
+/* タイトル表示中はbodyスクロールを無効化 */
+body.title-active {
+  overflow:hidden;
+  height:100vh;
 }
 #title-screen.hide {
   animation: titleFadeOut 7.5s ease-out forwards;
@@ -476,7 +483,7 @@ body::before {
 /* Content — bottom-left */
 .title-content {
   position:relative; z-index:1;
-  padding:0 0 64px 60px;
+  padding:0 0 clamp(28px, 6vh, 64px) clamp(20px, 5vw, 60px);
   display:flex; flex-direction:column;
   align-items:flex-start; gap:0;
 }
@@ -488,7 +495,7 @@ body::before {
 
 .title-logo {
   font-family:"Noto Sans JP",sans-serif;
-  font-size:clamp(52px,8vw,96px);
+  font-size:clamp(32px, min(8vw, 11vh), 96px);
   font-weight:600;
   letter-spacing:-3px;
   line-height:0.95;
@@ -527,7 +534,7 @@ body::before {
 
 /* Enter prompt — bottom right */
 .title-enter {
-  position:absolute; bottom:40px; right:52px;
+  position:absolute; bottom:clamp(20px, 4vh, 40px); right:clamp(20px, 4vw, 52px);
   display:flex; align-items:center; gap:10px;
   animation: titleReveal 1s 0.6s cubic-bezier(0.16,1,0.3,1) both,
              titlePulse 2.5s 1.6s ease-in-out infinite;
@@ -547,7 +554,7 @@ body::before {
 
 /* Year 6 badge — top right */
 .title-year-badge {
-  position:absolute; top:44px; right:52px;
+  position:absolute; top:clamp(20px, 4vh, 44px); right:clamp(20px, 4vw, 52px);
   font-size:10px; letter-spacing:4px; text-transform:uppercase;
   color:rgba(255,255,255,0.55);
   animation: titleReveal 1s 0.5s cubic-bezier(0.16,1,0.3,1) both;
@@ -982,7 +989,7 @@ body::before {
 #tableViewContent table { min-width:1100px; width:100%; border-collapse:collapse; table-layout:fixed; }
 </style>
 </head>
-<body>
+<body class="title-active">
 
 <!-- Title Screen -->
 <div id="title-screen" onclick="enterDashboard()">
@@ -2180,6 +2187,7 @@ renderAll();
 function enterDashboard() {
   const el = document.getElementById('title-screen');
   el.classList.add('hide');
+  document.body.classList.remove('title-active');  // ← スクロール再有効化
   document.body.classList.add('view-mode');  // ← 写真をbodyに表示
   setTimeout(() => { el.style.display = 'none'; }, 7500);
   setTimeout(() => { document.getElementById('topbar').style.opacity = '1'; }, 7500);
